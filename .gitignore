@@ -3,6 +3,11 @@
 
 # Ignorar o arquivo de configuração de ambiente
 .env
+.venvenv/
+venv/
+ENV/
+env.bak/
+venv.bak/
 
 # Ignorar arquivos de banco de dados SQLite
 *.sqlite3
@@ -29,3 +34,6 @@ __pycache__/
 dist/
 build/
 *.egg-info/
+
+# mypy
+.mypy cache/
