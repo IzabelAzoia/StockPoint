@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     # my apps
     'stockpoint.core',
     'stockpoint.produto',
+    'stockpoint.estoque',
 ]
 
 MIDDLEWARE = [
