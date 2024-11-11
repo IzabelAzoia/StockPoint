@@ -1,0 +1,31 @@
+# Ignorar o diretório virtualenv
+.venv/
+
+# Ignorar o arquivo de configuração de ambiente
+.env
+
+# Ignorar arquivos de banco de dados SQLite
+*.sqlite3
+
+# Ignorar arquivos compilados Python
+*.pyc
+*.pyo
+__pycache__/
+
+# Ignorar o diretório de migrações de banco de dados Django
+*/migrations/
+
+# Ignorar arquivos de logs
+*.log
+
+# Ignorar arquivos temporários do editor
+*.swp
+*.swo
+
+# Ignorar arquivos do VS Code (caso esteja usando)
+.vscode/
+
+# Ignorar arquivos gerados por builds ou distribuições
+dist/
+build/
+*.egg-info/
