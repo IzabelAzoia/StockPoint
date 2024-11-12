@@ -19,5 +19,6 @@ from django.urls import include, path
 
 urlpatterns = [
     path('', include('stockpoint.core.urls')),
+    path('produto/', include('stockpoint.produto.urls')),
     path('admin/', admin.site.urls),
 ]
