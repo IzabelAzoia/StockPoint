@@ -1,20 +1,14 @@
 # -*- coding: utf-8 -*-
 
-from django.core.management.base import BaseCommand
-from stockpoint.produto.models import Produto
-from random import choice, random, randint
+import os
+import django
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'stockpoint.settings')
+django.setup()
+
 import string
 import timeit
-class Command(BaseCommand):
-    help = 'Creates sample product data'
-
-    def handle(self, *args, **kwargs):
-
-     import os
-     import django
-     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'stockpoint.settings')
-     django.setup()
-
+from random import choice, random, randint
+from stockpoint.produto.models import Produto
 
 
 class Utils:
