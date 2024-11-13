@@ -5,13 +5,9 @@
 <a href="{% url 'produto:produto_list' %}">Voltar</a>
 
 <h1>{{ object }}
-  <span class="pull-right">
-    <a href="">
-        <button type="button" class="btn btn-success">
-            <span class="fas fa-pencil"></span>Editar
-        </button>
+    <a href="{% url 'produto:produto_edit' object.pk %}" class="btn btn-success float-right">
+        <span class="fas fa-pencil"></span> Editar
     </a>
-  </span>
 </h1>
 
 <div class="col-sm-6">

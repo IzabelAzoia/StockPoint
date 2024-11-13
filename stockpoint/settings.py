@@ -62,7 +62,11 @@ ROOT_URLCONF = 'stockpoint.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+
+            BASE_DIR / 'templates',
+            BASE_DIR / 'stockpoint' / 'estoque_entrada_list' / 'templates',
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
