@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'widget_tweaks',
+    'bootstrapform',
     # my apps
     'stockpoint.core',
     'stockpoint.produto',
