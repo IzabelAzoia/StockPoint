@@ -1,19 +1,23 @@
 {% extends "base.html" %}
 
+{% load widget_tweaks %}
+
 {% block content %}
 
 <div class="page-header">
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h2>Lista de Produtos</h2>
-        <a href="{% url 'produto:produto_add' %}">
-            <button type="button" class="btn btn-primary">
-                <span class="fas fa-plus"></span> Adicionar
-            </button>
-        </a>
+        <span class="pull-right">
+            <a href="{% url 'produto:produto_add' %}">
+        
+                <button type="button" class="btn btn-primary">
+                    <span class="fa fa-plus"></span> Adicionar
+                </button>
+            </a>
+        </span>
     </div>
 
     {% if object_list %}
-
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -30,9 +34,9 @@
                     <tr>
                         <td>
                             {% if object.importado %}
-                                <i class="fas fa-check-circle ok"></i>
+                                <i class="fa fa-check-circle ok"></i>
                             {% else %}
-                                <i class="fas fa-minus-circle no"></i> 
+                                <i class="fa fa-minus-circle no"></i> 
                             {% endif %}
                         </td>
                         <td>{{ object.ncm }}</td>
@@ -40,15 +44,31 @@
                             <a href="{{ object.get_absolute_url }}">{{ object.produto }}</a>
                         </td>
                         <td>R$ <span class="pull-right">{{ object.preco}}</span></td>
-                        <td class="text-center">{{ object.estoque}}</td>
-                        <td class="text-center">{{ object.estoque_minimo}}</td>
+                        <td class="text-center">{{ object.estoque }}</td>
+                        <td class="text-center">{{ object.estoque_minimo }}</td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
-    {% else %}    
+    {% else %}
         <p class="alert alert-warning">Sem itens na lista.</p>
     {% endif %}
 </div>
 
 {% endblock content %}
+
+{% block css %}
+<style>
+    span.required:after {
+        content: "*";
+        color: brown;
+    }
+</style>
+{% endblock css %}
+
+{% block js %}
+<script>
+</script>
+{% endblock js %}
+
+

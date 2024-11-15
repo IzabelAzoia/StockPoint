@@ -4,9 +4,9 @@
 
 <div class="d-flex justify-content-between align-items-center mb-3">
     <h2>Estoque Entrada</h2>
-    <a href="% url 'estoque:estoque_entrada_add' %">
+    <a href="{% url 'estoque:estoque_entrada_add' %}">
         <button type="button" class="btn btn-primary">
-            <span class="fas fa-plus"></span> Adicionar
+            <span class="fa fa-plus"></span> Adicionar
         </button>
     </a>
 </div>
@@ -25,20 +25,18 @@
     {% for object in object_list %}
     <tr>
         <td>
-            <a href="{{ object.get_absolute_url}}">{{ object }}</a>
+            <a href="{{ object.get_absolute_url }}">{{ object }}</a>
         </td>
         <td>{{ object.nf_formated }}</td>
         <td>{{ object.created }}</td>
-        <td>{{ object.funcionario.firs_name }}</td>
+        <td>{{ object.funcionario.first_name }}</td>
     </tr>
     {% endfor %}
    </tbody>
 </table>
 
-
 {% else %}
   <p class="alert alert-warning">Sem itens na lista.</p>
 {% endif %}
-
 
 {% endblock content %}

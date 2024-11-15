@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<a href="{% url 'estoque:estoque_entrada_list' %}">Voltar</a>
+<a href="{% url 'estoque:estoque_entrada_list' %}" class="btn btn-link">Voltar</a>
 
 <h1>{{ object }}</h1>
 
@@ -10,15 +10,15 @@
     <table class="table table-user-information">
         <tbody>
             <tr>
-                <th class="text-ringht">NF</th>
+                <th class="text-end">NF</th>
                 <td>{{ object.nf_formated }}</td>
             </tr>
             <tr>
-                <th class="text-ringht">Data</th>
+                <th class="text-end">Data</th>
                 <td>{{ object.created }}</td>
             </tr>
             <tr>
-                <th class="text-ringht">Funcionário</th>
+                <th class="text-end">Funcionário</th>
                 <td>{{ object.funcionario.first_name }}</td>
             </tr>
         </tbody>
@@ -41,11 +41,7 @@
             <td>{{ obj.saldo }}</td>
         </tr>
         {% endfor %}
-
     </tbody>
 </table>
 
 {% endblock content %}
-
-
-
