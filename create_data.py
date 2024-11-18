@@ -8,7 +8,7 @@ django.setup()
 import string
 import timeit
 from random import choice, random, randint
-from stockpoint.produto.models import Produto
+from stockpoint.produtos.models import Produto
 
 
 class Utils:

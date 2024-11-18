@@ -1,6 +1,9 @@
 from django.db.models import Sum, F
 from django.utils.formats import number_format
 from django.utils import timezone
+from marcas.models import Marca
+from categorias.models import Categoria
+from produtos.models import Produto
 
 
 def get_produto_metrics():
@@ -16,3 +19,14 @@ def get_produto_metrics():
         total_quantity=total_quantity,
         total_profit=number_format(total_profit, decimal_pos=2, force_grouping=True),
     )
+
+
+
+def get_graphic_produto_categoria_metric():
+    categorias = Categoria.objects.all()
+    return {categoria.name: Produto.objects.filter(categoria=categoria).count() for categoria in categorias}
+
+
+def get_graphic_produto_marca_metric():
+    marcas = Marca.objects.all()
+    return {marca.name: Produto.objects.filter(marca=marca).count() for marca in marcas}

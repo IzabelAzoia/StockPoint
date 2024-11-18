@@ -1,5 +1,5 @@
 # Ignorar o diretório virtualenv
-.venv/
+venv/
 
 # Ignorar o arquivo de configuração de ambiente
 .env
