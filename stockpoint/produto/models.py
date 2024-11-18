@@ -1,19 +1,18 @@
 from django.db import models
-from django.urls import reverse_lazy
+
 
 class Produto(models.Model):
-    importado = models.BooleanField(default=False)
-    ncm = models.CharField('NCM', max_length=8)
-    produto = models.CharField(max_length=100, unique=True)
-    preco = models.DecimalField('preço', max_digits=7, decimal_places=2)
-    estoque = models.IntegerField('estoque atual')
-    estoque_minimo = models.PositiveIntegerField('estoque mínimo', default=0)
+    title = models.CharField(max_length=500)
+    description = models.TextField(null=True, blank=True)
+    serie_number = models.CharField(max_length=200, null=True, blank=True)
+    cost_price = models.DecimalField(max_digits=20, decimal_places=2)
+    selling_price = models.DecimalField(max_digits=20, decimal_places=2)
+    quantity = models.IntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ('produto',)
+        ordering = ['title']
 
     def __str__(self):
-        return self.produto
-    
-    def get_absolute_url(self):
-        return reverse_lazy('produto:produto_detail', kwargs={'pk': self.pk})
+        return self.title

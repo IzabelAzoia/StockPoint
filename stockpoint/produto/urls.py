@@ -1,11 +1,11 @@
 from django.urls import path
-from stockpoint.produto import views as v
+from . import views
 
-app_name = 'produto'
 
 urlpatterns = [
-    path('', v.produto_list, name='produto_list'),
-    path('<int:pk>/', v.produto_detail, name='produto_detail'),
-    path('add/', v.ProdutoCreate.as_view(), name='produto_add'),
-    path('<int:pk>/edit', v.ProdutoUpdate.as_view(), name='produto_edit'),
+    path('produtos/list/', views.ProdutoListView.as_view(), name='produto_list'),
+    path('produtos/create/', views.ProdutoCreateView.as_view(), name='produto_create'),
+    path('produtos/<int:pk>/detail/', views.ProdutoDetailView.as_view(), name='produto_detail'),
+    path('produtos/<int:pk>/update/', views.ProdutoUpdateView.as_view(), name='produco_update'),
+    path('produtos/<int:pk>/delete/', views.ProdutoDeleteView.as_view(), name='produto_delete'),
 ]

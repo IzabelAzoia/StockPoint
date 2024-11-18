@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    SGE - Home
+{% endblock %}
+
+{% block content %}
+  {% include 'components/_product_metrics.html' %}
+  {% include 'components/_sales_metrics.html' %}
+
+  <div class="row mt-4 justify-content-center">
+    <div class="col-md-6 text-center">
+      <h5 class="text-center mb-3">Valor de vendas (Últimos 7 Dias)</h5>
+      <canvas id="dailySalesChart"></canvas>
+    </div>
+    <div class="col-md-6 text-center">
+      <h5 class="text-center mb-3">Quantidade de Vendas Diárias</h5>
+      <canvas id="dailySalesQuantityChart"></canvas>
+    </div>
+  </div>
+
+  <div class="row mt-5 justify-content-center">
+    <div class="col-md-6 text-center">
+      {% if produto_contagem_por_categoria != '{}' %}
+        <h5 class="mb-3">Produtos por Categoria</h5>
+        <div class="mb-4"></div>
+        <div class="embed-responsive embed-responsive-1by1" style="width: 400px; display: inline-block;">
+          <canvas id="produtoPorCategoriaChart" class="embed-responsive-item"></canvas>
+        </div>
+      {% endif %}
+    </div>
+    <div class="col-md-6 text-center">
+      {% if produto_contagem_por_marca != '{}' %}
+        <h5 class="mb-3">Produtos por Marca</h5>
+        <div class="mb-4"></div>
+        <div style="width: 400px; display: inline-block;">
+          <canvas id="produtoPorMarcaChart" class="embed-responsive-item"></canvas>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      var dadosVendasDiarias = JSON.parse('{{ dados_vendas_diarias|safe }}');
+      var dadosQuantidadeVendasDiarias = JSON.parse('{{ dados_quantidade_vendas_diarias|safe }}');
+
+      var ctxDailySales = document.getElementById('dailySalesChart').getContext('2d');
+      var dailySalesChart = new Chart(ctxDailySales, {
+        type: 'line',
+        data: {
+          labels: dadosVendasDiarias.dates,
+          datasets: [{
+            label: 'Valor em vendas',
+            data: dadosVendasDiarias.values,
+            fill: false,
+            borderColor: 'rgba(54, 162, 235, 1)',
+            borderWidth: 2,
+            tension: 0.5
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+
+      var ctxDailySalesQuantity = document.getElementById('dailySalesQuantityChart').getContext('2d');
+      var dailySalesQuantityChart = new Chart(ctxDailySalesQuantity, {
+        type: 'bar',
+        data: {
+          labels: dadosQuantidadeVendasDiarias.dates,
+          datasets: [{
+            label: 'Quantidade de Vendas',
+            data: dadosQuantidadeVendasDiarias.values,
+            backgroundColor: 'rgba(255, 99, 132, 0.6)',
+            borderColor: 'rgba(255, 99, 132, 1)',
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+
+      var produtoContagemPorCategoria = JSON.parse('{{ produto_contagem_por_categoria|safe }}');
+      var produtoContagemPorMarca = JSON.parse('{{ produto_contagem_por_marca|safe }}');
+
+      var ctxCategoria = document.getElementById('produtoPorCategoriaChart').getContext('2d');
+      var produtoPorCategoriaChart = new Chart(ctxCategoria, {
+        type: 'doughnut',
+        data: {
+          labels: Object.keys(produtoContagemPorCategoria),
+          datasets: [{
+            data: Object.values(produtoContagemPorCategoria),
+            borderWidth: 1
+          }]
+        },
+        options: {
+          plugins: {
+            legend: {
+              display: false
+            },
+          }
+        }
+      });
+
+      var ctxMarca = document.getElementById('produtoPorMarcaChart').getContext('2d');
+      var produtoPorMarcaChart = new Chart(ctxMarca, {
+        type: 'doughnut',
+        data: {
+          labels: Object.keys(produtoContagemPorMarca),
+          datasets: [{
+            data: Object.values(produtoContagemPorMarca),
+            borderWidth: 1
+          }]
+        },
+        options: {
+          plugins: {
+            legend: {
+              display: false
+            },
+          }
+        }
+      });
+    });
+  </script>
+{% endblock %}

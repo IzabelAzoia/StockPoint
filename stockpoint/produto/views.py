@@ -1,41 +1,60 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from django.views.generic import CreateView, UpdateView
-from .models import Produto
-from .forms import ProdutoForm
+from django.urls import reverse_lazy
+from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
+from app import metrics
+from . import models, forms
 
-# Função para listar produtos
-def produto_list(request):
+
+class ProdutoListView(ListView):
+    model = models.Produto
     template_name = 'produto_list.html'
-    objects = Produto.objects.all()
-    context = {'object_list': objects}
-    return render(request, template_name, context)
+    context_object_name = 'produtos'
+    paginate_by = 10
 
-# Função para visualizar o detalhe de um produto
-def produto_detail(request, pk):
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        title = self.request.GET.get('title')
+        serie_number = self.request.GET.get('serie_number')
+        categoria = self.request.GET.get('categoria')
+        marca = self.request.GET.get('marca')
+
+        if title:
+            queryset = queryset.filter(title__icontains=title)
+        if serie_number:
+            queryset = queryset.filter(serie_number__icontains=serie_number)
+        if categoria:
+            queryset = queryset.filter(categoria_id=categoria)
+        if marca:
+            queryset = queryset.filter(marca__id=marca)
+
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['produto_metrics'] = metrics.get_produto_metrics()
+        context['sales_metrics'] = metrics.get_sales_metrics()
+        return context
+
+
+class ProdutoCreateView(CreateView):
+    model = models.Produto
+    template_name = 'produto_create.html'
+    form_class = forms.ProdutoForm
+    success_url = reverse_lazy('produto_list')
+
+
+class ProdutoDetailView(DetailView):
+    model = models.Produto
     template_name = 'produto_detail.html'
-    # Usando get_object_or_404 para evitar erro caso o produto não exista
-    obj = get_object_or_404(Produto, pk=pk)
-    context = {'object': obj}
-    return render(request, template_name, context)
 
-# CreateView para adicionar um novo produto
-class ProdutoCreate(CreateView):
-    model = Produto
-    template_name = 'produto_form.html'
-    form_class = ProdutoForm
 
-    # Redireciona para a página de detalhes do produto após a criação
-    def form_valid(self, form):
-        response = super().form_valid(form)
-        return redirect(self.object.get_absolute_url())
+class ProdutoUpdateView(UpdateView):
+    model = models.Produto
+    template_name = 'produto_update.html'
+    form_class = forms.ProdutoForm
+    success_url = reverse_lazy('produto_list')
 
-# UpdateView para editar um produto existente
-class ProdutoUpdate(UpdateView):
-    model = Produto
-    template_name = 'produto_form.html'
-    form_class = ProdutoForm
 
-    # Redireciona para a página de detalhes do produto após a atualização
-    def form_valid(self, form):
-        response = super().form_valid(form)
-        return redirect(self.object.get_absolute_url())
+class ProdutoDeleteView(DeleteView):
+    model = models.Produto
+    template_name = 'produto_delete.html'
+    success_url = reverse_lazy('produto_list')

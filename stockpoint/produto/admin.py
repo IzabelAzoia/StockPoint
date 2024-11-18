@@ -1,15 +1,10 @@
 from django.contrib import admin
-from .models import Produto
+from . import models
 
-@admin.register(Produto)
-class Produtoadmin(admin.ModelAdmin):
-    list_display=(
-        '__str__',
-        'importado',
-        'ncm',
-        'preco',
-        'estoque',
-        'estoque_minimo',
-    )
-    search_fields=('produto',)
-    list_filter=('importado',)
+
+class ProdutoAdmin(admin.ModelAdmin):
+    list_display = ('title', 'serie_number',)
+    search_fields = ('title',)
+
+
+admin.site.register(models.Produto, ProdutoAdmin)
