@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'marcas',
     'categorias',
     'fornecedores',
+    'entradas',
+    'saidas',
 ]
 
 MIDDLEWARE = [
@@ -80,8 +82,12 @@ WSGI_APPLICATION = 'app.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'stockpoint_db',  # Nome do banco de dados no MySQL
+        'USER': 'root',        # Seu nome de usuário MySQL
+        'PASSWORD': 'mj23mc16Mi10&',      # Sua senha MySQL
+        'HOST': 'localhost',      # Endereço do servidor de banco de dados (localhost se estiver local)
+        'PORT': '3306',           # A porta padrão do MySQL
     }
 }
 

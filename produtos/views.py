@@ -45,6 +45,10 @@ class ProdutoCreateView(CreateView):
     form_class = forms.ProdutoForm
     success_url = reverse_lazy('produto_list')
 
+    def form_invalid(self, form):
+        print(form.errors)  # Mostra os erros no console
+        return super().form_invalid(form)
+
 
 class ProdutoDetailView(DetailView):
     model = models.Produto
