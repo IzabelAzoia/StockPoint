@@ -10,8 +10,9 @@
 
         <form method="post">
           {% csrf_token %}
-          <button type="submit" class="btn btn-danger">Deletar</button>
-        </form>
+          <button type="submit">Confirmar exclusão</button>
+          <a href="{% url 'produto_list' %}">Cancelar</a>
+      </form>
         
         <a href="{% url 'produto_list' %}" class="btn btn-secondary mt-3">Cancelar e Voltar para a Lista de Produtos</a>
       </div>

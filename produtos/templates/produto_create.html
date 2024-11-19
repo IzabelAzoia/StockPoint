@@ -8,9 +8,19 @@
       <div class="card-body">
         <form method="post">
           {% csrf_token %}
-          {{ form.as_p }}
-          <button type="submit" class="btn btn-primary">Salvar Produto</button>
-        </form>
+          {{ form.as_p }}  <!-- Exibe os campos do formulário -->
+          {% if form.errors %}
+              <div class="errors">
+                  {% for field in form %}
+                      {% for error in field.errors %}
+                          <p><strong>{{ error }}</strong></p>
+                      {% endfor %}
+                  {% endfor %}
+              </div>
+          {% endif %}
+          <button type="submit">Enviar</button>
+      </form>
+      
       </div>
     </div>
     <a href="{% url 'produto_list' %}" class="btn btn-secondary mt-3">Cancelar e Voltar para a Lista de Produtos</a>
