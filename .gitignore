@@ -37,3 +37,4 @@ build/
 
 # mypy
 .mypy cache/
+.settings
