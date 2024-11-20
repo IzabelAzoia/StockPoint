@@ -38,4 +38,4 @@ build/
 # mypy
 .mypy cache/
 
-settings.py
+app/settings.py
