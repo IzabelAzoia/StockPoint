@@ -29,6 +29,7 @@ class FornecedorCreateView(CreateView):
 class FornecedorDetailView(DetailView):
     model = models.Fornecedor
     template_name = 'fornecedor_detail.html'
+    context_object_name = 'object' 
 
 
 class FornecedorUpdateView(UpdateView):
