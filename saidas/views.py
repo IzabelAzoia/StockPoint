@@ -2,6 +2,7 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView
 from app import metrics
 from . import models, forms
+from fornecedores.models import Fornecedor
 
 
 class SaidaListView(ListView):
@@ -15,7 +16,7 @@ class SaidaListView(ListView):
         produto = self.request.GET.get('produto')
 
         if produto:
-            queryset = queryset.filter(product__title__icontains=produto)
+            queryset = queryset.filter(produto__title__icontains=produto)
 
         return queryset
 
@@ -31,6 +32,14 @@ class SaidaCreateView(CreateView):
     template_name = 'saida_create.html'
     form_class = forms.SaidaForm
     success_url = reverse_lazy('saida_list')
+
+    def form_valid(self, form):
+        
+        fornecedor = Fornecedor.objects.first()
+        if fornecedor:
+            form.instance.fornecedor = fornecedor 
+        
+        return super().form_valid(form)
 
 
 class SaidaDetailView(DetailView):

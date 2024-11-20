@@ -34,7 +34,7 @@
                 <div class="input-group">
                     <select class="form-select" name="categoria">
                         <option value="" {% if not request.GET.categoria %} selected {% endif %}>Todas as Categorias</option>
-                        {% for categoria in categories %}
+                        {% for categoria in categorias %}
                             <option value="{{ categoria.id }}" {% if request.GET.categoria == categoria.id %} selected {% endif %}>{{ categoria.name }}</option>
                         {% endfor %}
                     </select>
@@ -76,7 +76,7 @@
                             </a>
                         </td>
                         <td>{{ produto.title }}</td>
-                        <td>{{ produto.category }}</td>
+                        <td>{{ produto.categoria }}</td>
                         <td>{{ produto.marca }}</td>
                         <td>R$ {{ produto.cost_price }}</td>
                         <td>R$ {{ produto.selling_price }}</td>

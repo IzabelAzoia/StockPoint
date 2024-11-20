@@ -14,7 +14,7 @@ class EntradaListView(ListView):
         produto = self.request.GET.get('produto')
 
         if produto:
-            queryset = queryset.filter(product__title__icontains=produto)
+            queryset = queryset.filter(produto__title__icontains=produto)
 
         return queryset
 

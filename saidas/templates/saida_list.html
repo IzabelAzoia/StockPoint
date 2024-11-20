@@ -14,7 +14,7 @@
         <div class="col-md-6">
             <form method="get" action="{% url 'saida_list' %}">
                 <div class="input-group">
-                    <input type="text" class="form-control" name="product" placeholder="Produto" value="{{ request.GET.product }}">
+                    <input type="text" class="form-control" name="produto" placeholder="Produto" value="{{ request.GET.produto }}">
                     <button type="submit" class="btn btn-primary">
                         <i class="bi bi-search"></i>
                     </button>
@@ -48,8 +48,8 @@
                                 {{ saida.id }}
                             </a>
                         </td>
-                        <td>{{ saida.product }}</td>
-                        <td>{{ saida.supplier }}</td>
+                        <td>{{ saida.produto }}</td>
+                        <td>{{ saida.fornecedor }}</td>
                         <td>{{ saida.quantity }}</td>
                         <td>{{ saida.created_at }}</td>
                         <td>
