@@ -38,3 +38,5 @@ build/
 # mypy
 .mypy cache/
 
+staticfiles/
+
