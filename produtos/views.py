@@ -22,7 +22,6 @@ class ProdutoListView(ListView):
         categoria = self.request.GET.get('categoria')
         marca = self.request.GET.get('marca')
 
-        # Filtros
         if title:
             queryset = queryset.filter(title__icontains=title)
         if serie_number:
@@ -41,7 +40,6 @@ class ProdutoListView(ListView):
         context['categorias'] = Categoria.objects.all()
         context['marcas'] = Marca.objects.all()
 
-        # Manter os filtros na URL
         context['title'] = self.request.GET.get('title', '')
         context['serie_number'] = self.request.GET.get('serie_number', '')
         context['categoria'] = self.request.GET.get('categoria', '')
@@ -75,7 +73,6 @@ class ProdutoDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         produto = self.get_object()
 
-        # Produtos relacionados pela categoria
         context['outros_produtos'] = models.Produto.objects.filter(categoria=produto.categoria).exclude(id=produto.id)
         return context
 
