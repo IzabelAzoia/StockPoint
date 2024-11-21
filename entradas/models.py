@@ -4,8 +4,8 @@ from fornecedores.models import Fornecedor
 
 
 class Entrada(models.Model):
-    fornecedor = models.ForeignKey(Fornecedor, on_delete=models.SET_NULL, null=True, related_name='entradas')
-    produto = models.ForeignKey(Produto, on_delete=models.SET_NULL, null=True, related_name='entradas')
+    fornecedor = models.ForeignKey(Fornecedor, on_delete=models.PROTECT, related_name='entradas')
+    produto = models.ForeignKey(Produto, on_delete=models.PROTECT, related_name='entradas')
     quantity = models.IntegerField()
     description = models.TextField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)

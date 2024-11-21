@@ -11,8 +11,9 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 import environ
 
-env = environ.Env()
 environ.Env.read_env()
+
+
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -85,7 +86,12 @@ WSGI_APPLICATION = 'app.wsgi.application'
 
 DATABASES = {
     'default': {
-'default': env.db(),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'stockpoint_db',  # Defina diretamente o nome do banco
+        'USER': 'root',           # Defina o usuário diretamente
+        'PASSWORD': 'mj23mc16Mi10&',  # Defina a senha diretamente
+        'HOST': 'localhost',      # Defina o host diretamente
+        'PORT': '3306',  
     }
 }
 
