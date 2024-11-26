@@ -8,11 +8,18 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
+
 """
+  # Isso deve imprimir o valor de DB_NAME, se estiver correto
+
 import environ, os
 env = environ.Env()
 environ.Env.read_env()
 from pathlib import Path
+
+environ.Env.read_env(env.str('ENV_PATH', '.env'))
+
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -74,8 +81,9 @@ WSGI_APPLICATION = 'app.wsgi.application'
 
 
 DATABASES = {
-'default': env.db('DATABASE_URL') 
+'default': env.db('DATABASE_URL')  
 }
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
 
