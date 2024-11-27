@@ -5,6 +5,10 @@ from marcas.models import Marca
 from categorias.models import Categoria
 from . import models, forms
 import logging
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from .models import Produto
+from .serializers import ProdutoSerializer
 
 logger = logging.getLogger(__name__)
 
@@ -39,7 +43,6 @@ class ProdutoListView(ListView):
         context['sales_metrics'] = metrics.get_sales_metrics()
         context['categorias'] = Categoria.objects.all()
         context['marcas'] = Marca.objects.all()
-
         context['title'] = self.request.GET.get('title', '')
         context['serie_number'] = self.request.GET.get('serie_number', '')
         context['categoria'] = self.request.GET.get('categoria', '')
@@ -99,3 +102,11 @@ class ProdutoDeleteView(DeleteView):
         context['produto'] = produto
         return context
 
+class ProdutoListAPIView(APIView):
+    def get(self, request):
+        produtos = Produto.objects.all()
+        title = request.GET.get('title')
+        if title:
+            produtos = produtos.filter(title__icontains=title)
+        serializer = ProdutoSerializer(produtos, many=True)
+        return Response(serializer.data)

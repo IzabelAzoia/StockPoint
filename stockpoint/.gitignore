@@ -26,6 +26,7 @@ __pycache__/
 # Ignorar arquivos temporários do editor
 *.swp
 *.swo
+Thumbs.db
 
 # Ignorar arquivos do VS Code (caso esteja usando)
 .vscode/
@@ -39,4 +40,35 @@ build/
 .mypy cache/
 
 staticfiles/
+
+node_modules/
+# Sublime Text
+*.sublime-workspace
+*.sublime-project
+
+# PyCharm / JetBrains
+.idea/
+
+# Vim
+*.swp
+# Ignorar arquivos de build do React Native
+android/.gradle/
+android/build/
+android/app/build/
+# Ignorar cache do npm
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# Ignorar arquivos de configuração de AWS ou outras credenciais
+.env.local
+.env.development
+.env.production
+.env.test
+# Ignorar arquivos de pacotes Python
+*.egg
+.eggs/
+
+
+
 

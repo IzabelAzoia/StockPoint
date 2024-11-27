@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'app',
 
     'produtos',
     'marcas',
@@ -83,7 +85,7 @@ WSGI_APPLICATION = 'app.wsgi.application'
 DATABASES = {
 'default': env.db('DATABASE_URL')  
 }
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 
 

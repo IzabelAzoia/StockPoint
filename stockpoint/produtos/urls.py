@@ -3,6 +3,7 @@ from django.urls import path
 from .views import ProdutoListView, ProdutoCreateView, ProdutoDetailView, ProdutoUpdateView, ProdutoDeleteView
 
 urlpatterns = [
+    path('api/produtos/', ProdutoListView.as_view(), name='produto_list_api'),
     path('', ProdutoListView.as_view(), name='produto_list'),
     path('criar/', ProdutoCreateView.as_view(), name='produto_create'),
     path('<int:pk>/', ProdutoDetailView.as_view(), name='produto_detail'),
