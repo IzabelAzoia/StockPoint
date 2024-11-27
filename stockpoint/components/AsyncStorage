@@ -1,0 +1,35 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+const login = async (email, password) => {
+  try {
+    const apiUrl = 'http://ec2-3-87-211-227.compute-1.amazonaws.com/api';
+    
+    const response = await fetch(apiUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email, password }),
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      const token = data.token;
+
+      await AsyncStorage.setItem('jwt_token', token);
+
+      console.log('Login successful, token stored');
+      return { success: true };
+    } else {
+      const errorData = await response.json();
+      console.log('Login failed:', errorData.detail || 'Unknown error');
+      return { success: false, message: errorData.detail || 'Unknown error' };
+    }
+  } catch (error) {
+    console.error('Login error:', error);
+    return { success: false, message: 'Network error or request failed' };
+  }
+};
+
+export default login;
+
