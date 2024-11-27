@@ -41,7 +41,10 @@ build/
 
 staticfiles/
 
-node_modules/
+# Adicione isso ao .gitignore, se não estiver lá
+/node_modules
+/package-lock.json
+/package.json
 # Sublime Text
 *.sublime-workspace
 *.sublime-project
