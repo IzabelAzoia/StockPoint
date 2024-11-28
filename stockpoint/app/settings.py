@@ -85,7 +85,7 @@ WSGI_APPLICATION = 'app.wsgi.application'
 DATABASES = {
 'default': env.db('DATABASE_URL')  
 }
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['seusite.com', 'www.seusite.com', 'IP-do-servidor']
 
 
 
