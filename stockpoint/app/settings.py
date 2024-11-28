@@ -85,7 +85,7 @@ WSGI_APPLICATION = 'app.wsgi.application'
 DATABASES = {
 'default': env.db('DATABASE_URL')  
 }
-ALLOWED_HOSTS = ['seusite.com', 'www.seusite.com', 'IP-do-servidor']
+ALLOWED_HOSTS = ['http://ec2-3-87-211-227.compute-1.amazonaws.com/api']
 
 
 
